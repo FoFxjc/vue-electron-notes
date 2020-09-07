@@ -12,13 +12,13 @@
       />
       <file-list :fileList="fileList" :active.sync="activeIndex" :selectedFile.sync="selectedFile">
         <template v-slot:menu>
-          <li @click="handleFileTop()">{{ selectedFile.isTop ? '取消置顶' : '置顶' }}</li>
-          <li @click="fileDelete()">删除</li>
+          <li @click="handleFileTop()">{{ selectedFile.isTop ? 'Cancel Top' : 'Top' }}</li>
+          <li @click="fileDelete()">Delete</li>
         </template>
       </file-list>
     </div>
     <div class="main-container">
-      <div class="placeholder" v-if="fileList.length === 0">暂无笔记</div>
+      <div class="placeholder" v-if="fileList.length === 0">NO NOTE</div>
       <file-edit
         v-else
         v-model="fileItem.content"
@@ -98,7 +98,7 @@ export default {
     },
     // 新增笔记
     fileCreate() {
-      const defaultFile = { title: '无标题笔记', content: '', isTop: false }
+      const defaultFile = { title: 'No title', content: '', isTop: false }
       this.$db.markdown.insert(defaultFile).then(async () => {
         await this.getFileList()
         const [firstFileItem] = this.fileList
@@ -126,9 +126,9 @@ export default {
     },
     // 删除笔记
     fileDelete() {
-      this.$confirm('此操作将永久删除该笔记, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('Delete this notes ?', 'Alert', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       })
         .then(() => {
@@ -136,11 +136,11 @@ export default {
           this.$db.markdown
             .remove({ _id })
             .then(num => {
-              this.$message.success(`删除了${num}个项目`)
+              this.$message.success(`Delete ${num} projects`)
               this.init()
             })
             .catch(() => {
-              this.$message.error('删除失败')
+              this.$message.error('Delete  Error')
             })
         })
         .catch(() => {})

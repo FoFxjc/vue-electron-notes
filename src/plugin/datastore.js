@@ -7,10 +7,11 @@
  */
 import Vue from 'vue'
 import crypto from 'crypto'
+import path from 'path'
 import Datastore from 'nedb-promises'
 import { remote } from 'electron'
 
-const basePath = remote.app.getPath('userData')
+const basePath = path.join(remote.app.getAppPath(), '/tableData.db')
 console.log('程序数据存储路径：', basePath)
 
 const algorithm = 'aes-128-cbc' // 加密算法类型

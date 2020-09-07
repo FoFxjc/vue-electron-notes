@@ -7,8 +7,8 @@
  -->
 <template>
   <div class="content-edit">
-    <el-input class="file-title" v-model="currentTitle" placeholder="请输入标题" @blur="handleTitleBlur" />
-    <mavon-editor v-bind="$attrs" v-on="$listeners" class="markdown-wrapper" />
+    <el-input class="file-title" v-model="currentTitle" placeholder="Please Enter Title" @blur="handleTitleBlur" />
+    <mavon-editor v-bind="$attrs" v-on="$listeners" class="markdown-wrapper" language="en"/>
   </div>
 </template>
 
